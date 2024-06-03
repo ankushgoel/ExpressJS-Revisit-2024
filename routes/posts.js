@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 // For using express as a backend
@@ -26,4 +26,5 @@ router.get('/:id', (req, res) => {
         res.json(post);
 })
 
-module.exports = router;
+// module.exports = router;
+export default router;
