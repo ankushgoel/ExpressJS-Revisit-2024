@@ -1,6 +1,9 @@
 import express from 'express';
 import url from 'url';
 import path from 'path';
+import logger from './middleware/logger.js';
+import errorHandler from './middleware/error.js';
+import notFound from './middleware/notFound.js';
 import posts from './routes/posts.js'
 
 const PORT = 8080;
@@ -13,6 +16,8 @@ const __dirname = path.dirname(__filename); // get the name of the directory
 app.use(express.json());
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({extended: false}));
+
+app.use(logger);
 
 // Manual routes
 // app.get('/', (req, res) => {
@@ -30,6 +35,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/api/posts', posts);
+
+// Error Handler Middleware
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`Server running on PORT: ${PORT}`);
