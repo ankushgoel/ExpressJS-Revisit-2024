@@ -9,6 +9,11 @@ const app = express();
 const __filename = url.fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
 
+// Body Parser Middleware
+app.use(express.json());
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded({extended: false}));
+
 // Manual routes
 // app.get('/', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'public', 'index.html'))
